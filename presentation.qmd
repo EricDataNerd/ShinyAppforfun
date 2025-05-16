@@ -1,0 +1,44 @@
+---
+title: "ShinyAppPresentation"
+author: "Eric"
+format: revealjs
+editor: visual
+---
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## About this Shiny Project
+
+This project is to design a ShinyApp for end users. This app outputs the predicted qsec value to the end user in the bar chart format. As part of the marking criteria, share the application link by pasting it into the provided text box, and share the server.R and ui.R code on github.
+
+## How to use this App
+
+Using the data provided by mtcars dataset, a linear model was fitted to predict qsec value based on the cylinder number, car weight, and transmission type.
+
+The application is running on (https://ericshinyjourney.shinyapps.io/ShinyAppforfun/)
+
+ui.R, and Server.R Code in my github repository (https://github.com/EricDataNerd/ShinyAppforfun.git)
+
+## mtcars Dataset
+
+The data used in the app comes from the mtcars dataset. 
+
+```{r summary}
+data(mtcars)
+summary(mtcars)
+```
+
+## Plot
+The scatterplot below contains data used for the prediction model
+
+```{r plot}
+library(HistData)
+data(mtcars)
+mtcars$am[mtcars$am == 0] <- "automatic"
+mtcars$am[mtcars$am == 1] <- "manual"
+plot(jitter(mtcars$qsec) ~ mtcars$cyl,xlab="number of cylinders",ylab="qsec (second)",main="Scatterplot of mtcars data",pch=19,frame.plot=FALSE,col=ifelse(mtcars$am=="automatic", "pink", "light blue"))
+legend(65,80,pch=c(19,19),col=c("pink","light blue"),c("automatic", "manual"),bty="o",cex=.8)
+
+```
